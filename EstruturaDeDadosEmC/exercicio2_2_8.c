@@ -15,7 +15,9 @@ struct stack {
   int top;
   int m[maxSize];
 };
+//Cria o tipo de dado stack
 typedef struct stack Stack;
+//a função verifica se a lista está vazia(vazia->top=-1, -1+1=0=False, !top+1=True)
 int empty(Stack *s) { return !((s->top) + 1); }
 int full(Stack *s) { return !((s->top) - (maxSize - 1)); }
 int quantM(Stack *s) { return s->m[s->top]; }
