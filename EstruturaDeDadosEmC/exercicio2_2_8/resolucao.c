@@ -1,3 +1,4 @@
+//implementado no replit
 // Livro Estrutura de Dados em C(Tenebaun, Aaaron M.)
 // Implementação de uma pilha para solucionar o 2.2.8
 // A pilha implementada usa um vetor para armazenar seus elementos
@@ -36,15 +37,17 @@ void popElement(Stack *s) {
   }
 }
 int main(void) {
+  //cria uma pilha principal e uma auxiliar
   Stack estacionamento, aux;
+  //define o topo da pilha e preenche o ekemento m(manobras)
   estacionamento.top = -1;
   aux.top = -1;
-  for (int i = 0; i < maxSize; estacionamento.m[i++] = 0)
-    ;
-  for (int i = 0; i < maxSize; aux.m[i++] = 0)
-    ;
+  for (int i = 0; i < maxSize; estacionamento.m[i++] = 0);
+  for (int i = 0; i < maxSize; aux.m[i++] = 0);
+  
   char op;
   char placa[9];
+  //Menu
   do {
     do {
       clscr;
@@ -65,6 +68,7 @@ int main(void) {
       }
     }
     if (op == 'S') {
+      //imprime os carros no estacionamento utilizando as operações de pilha
       printf("\nCarros no estacionamento:");
       int j = estacionamento.top + 2;
       while (!empty(&estacionamento)) {
