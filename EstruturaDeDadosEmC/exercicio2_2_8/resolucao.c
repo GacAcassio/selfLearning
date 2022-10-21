@@ -47,7 +47,6 @@ int main(void) {
   
   char op;
   char placa[9];
-  //Menu
   do {
     do {
       clscr;
@@ -55,8 +54,8 @@ int main(void) {
              "ENCERRAR\nINSIRA UMA OPCAO(E,S,Z):");
       scanf("%c", &op);
     } while (op != 'E' && op != 'S' && op != 'Z');
+    getchar();
     if (op == 'E') {
-      getchar();
       if (full(&estacionamento)) {
         printf("Não ha espaco no estacionamento\n");
         break;
@@ -68,48 +67,52 @@ int main(void) {
       }
     }
     if (op == 'S') {
-      //imprime os carros no estacionamento utilizando as operações de pilha
-      printf("\nCarros no estacionamento:");
-      int j = estacionamento.top + 2;
-      while (!empty(&estacionamento)) {
-        j--;
-        printf("\n%d\t%s", j, estacionamento.placa[estacionamento.top]);
-        pushElement(estacionamento.placa[estacionamento.top], &aux,
-                    quantM(&estacionamento));
-        popElement(&estacionamento);
-      }
-      while (!empty(&aux)) {
-        pushElement(aux.placa[aux.top], &estacionamento, quantM(&aux));
-        popElement(&aux);
-      }
-      getchar();
-      printf("\nINSIRA A PLACA DO VEICULO A SER RETIRADO:");
-      scanf("%9[^\n]s", placa);
-      while (!empty(&estacionamento) &&
-             strcmp(estacionamento.placa[estacionamento.top], placa)) {
-        j++;
-        pushElement(estacionamento.placa[estacionamento.top], &aux,
-                    quantM(&estacionamento));
-        popElement(&estacionamento);
-      }
-      if (!strcmp(estacionamento.placa[estacionamento.top], placa)) {
-        printf("O carro de placa %s foi retirado\nManobras feitas:%d\n",
-               estacionamento.placa[estacionamento.top],
-               quantM(&estacionamento));
-        popElement(&estacionamento);
-        while (!empty(&aux)) {
-          pushElement(aux.placa[aux.top], &estacionamento, (quantM(&aux) + 1));
-          popElement(&aux);
-        }
+      if (empty(&estacionamento)) {
+        printf("\nNão há carros no estacionamento");
+        getchar();
       } else {
+        printf("\nCarros no estacionamento:");
+        int j = estacionamento.top + 2;
+        while (!empty(&estacionamento)) {
+          j--;
+          printf("\n%d\t%s", j, estacionamento.placa[estacionamento.top]);
+          pushElement(estacionamento.placa[estacionamento.top], &aux,
+                      quantM(&estacionamento));
+          popElement(&estacionamento);
+        }
         while (!empty(&aux)) {
           pushElement(aux.placa[aux.top], &estacionamento, quantM(&aux));
           popElement(&aux);
         }
-        printf("Carro não encontrado\n");
+        getchar();
+        printf("\nINSIRA A PLACA DO VEICULO A SER RETIRADO:");
+        scanf("%9[^\n]s", placa);
+        while (!empty(&estacionamento) &&
+               strcmp(estacionamento.placa[estacionamento.top], placa)) {
+          j++;
+          pushElement(estacionamento.placa[estacionamento.top], &aux,
+                      quantM(&estacionamento));
+          popElement(&estacionamento);
+        }
+        if (!strcmp(estacionamento.placa[estacionamento.top], placa)) {
+          printf("O carro de placa %s foi retirado\nManobras feitas:%d\n",
+                 estacionamento.placa[estacionamento.top],
+                 quantM(&estacionamento));
+          popElement(&estacionamento);
+          while (!empty(&aux)) {
+            pushElement(aux.placa[aux.top], &estacionamento,
+                        (quantM(&aux) + 1));
+            popElement(&aux);
+          }
+        } else {
+          while (!empty(&aux)) {
+            pushElement(aux.placa[aux.top], &estacionamento, quantM(&aux));
+            popElement(&aux);
+          }
+          printf("Carro não encontrado\n");
+        }
+        getchar();
       }
-      getchar();
-      getchar();
     }
   } while (op != 'Z');
   return 0;
