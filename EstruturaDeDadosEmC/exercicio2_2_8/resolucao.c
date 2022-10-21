@@ -45,7 +45,7 @@ int main(void) {
   for (int i = 0; i < maxSize; estacionamento.m[i++] = 0);
   for (int i = 0; i < maxSize; aux.m[i++] = 0);
   
-  char op;
+ char op;
   char placa[9];
   do {
     do {
@@ -58,7 +58,7 @@ int main(void) {
     if (op == 'E') {
       if (full(&estacionamento)) {
         printf("Não ha espaco no estacionamento\n");
-        break;
+        getchar();
       } else {
         printf("\nINSIRA A PLACA DO VEICULO:");
         scanf("%9[^\n]s", placa);
@@ -84,9 +84,9 @@ int main(void) {
           pushElement(aux.placa[aux.top], &estacionamento, quantM(&aux));
           popElement(&aux);
         }
-        getchar();
         printf("\nINSIRA A PLACA DO VEICULO A SER RETIRADO:");
         scanf("%9[^\n]s", placa);
+          getchar();
         while (!empty(&estacionamento) &&
                strcmp(estacionamento.placa[estacionamento.top], placa)) {
           j++;
