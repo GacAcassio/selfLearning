@@ -7,32 +7,32 @@ int main(void) {
 	    t--;
 	    int l;
 	    scanf("%d", &l);
-	    int e[l],s[l];
+	    int e[l],s;
 	    for(int i=0; i<l; i++){
 	        scanf("%d", &e[i]);
 	    }
 	    int maior=0,menor=10;
 	    for(int i=0; i<l; i++){
 	        int j=1;
-	        s[i]=1;
+	        s=1;
 	        int k=e[i];
 	        while(e[i+j]-k<=2&&e[i+j]-k>=-2&&(i+j)<l){
 	            k=e[i+j];
 	            j++;
-	            s[i]++;
+	            s++;
 	        }
 	        j=1;
 	        k=e[i];
 	        while(e[i-j]-k<=2&&e[i-j]-k>=-2&&(i-j)>=0){
 	            k=e[i-j];
 	            j++;
-	            s[i]++;
+	            s++;
 	        }
-	        if(s[i]<menor&&s[i]!=0){
-	            menor=s[i];
+	        if(s<menor){
+	            menor=s;
 	        }
-	        if(s[i]>maior){
-	            maior=s[i];
+	        if(s>maior){
+	            maior=s;
 	        }
 	    }
 	    printf("%d %d\n", menor, maior);
